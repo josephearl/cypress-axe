@@ -1,0 +1,10 @@
+{
+    "integrationFolder": ".",
+    "chromeWebSecurity": false,
+    "baseUrl": "http://localhost:3030/",
+    "blockHosts": ["*fonts.googleapis.com", "*googletagmanager.com", "*google-analytics.com"],
+    "testFiles": "./test/cases/*.test.js",
+    "pluginsFile": "./test/plugins.js",
+    "fixturesFolder": "./test/fixtures",
+    "supportFile": "./test/support.js"
+}

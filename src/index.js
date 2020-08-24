@@ -37,10 +37,10 @@ const checkA11y = (
         })
     })
     .then(violations => {
+      if (violationCallback) {
+        violationCallback(violations)
+      }
       if (violations.length) {
-        if (violationCallback) {
-          violationCallback(violations)
-        }
         cy.wrap(violations, { log: false }).each(v => {
           const selectors = v.nodes
             .reduce((acc, node) => acc.concat(node.target), [])
