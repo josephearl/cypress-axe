@@ -40,10 +40,10 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/josephearl/cypress-axe.git"
+    "url": "git+https://github.com/josephearl/cypress-axe-commands.git"
   },
   "bugs": {
-    "url": "https://github.com/josephearl/cypress-axe/issues"
+    "url": "https://github.com/josephearl/cypress-axe-commands/issues"
   },
-  "homepage": "https://github.com/josephearl/cypress-axe#readme"
+  "homepage": "https://github.com/josephearl/cypress-axe-commands#readme"
 }
