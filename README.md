@@ -9,7 +9,7 @@ This package provides three simple [Cypress](https://cypress.io) commands to hel
 ### Add as a dev dependency:
 
 ```sh
-npm i -D cypress-axe
+npm i -D cypress-axe-commands
 ```
 
 ### Install peer dependencies:
@@ -22,10 +22,10 @@ npm i -D cypress
 
 ### Include the commands
 
-Update `Cypress/support/index.js` file to include the cypress-axe commands by adding:
+Update `Cypress/support/index.js` file to include the cypress-axe-commands commands by adding:
 
 ```js
-import 'cypress-axe'
+import 'cypress-axe-commands'
 ```
 
 ### Add a task to log the messages to the terminal when the cypress executes the spec files
@@ -94,7 +94,7 @@ The keys consist of [those accepted by `axe.run`'s options argument](https://www
 
 The `includedImpacts` key is an array of strings that map to `impact` levels in violations. Specifying this array will only include violations where the impact matches one of the included values. Possible impact values are "minor", "moderate", "serious", or "critical".
 
-Filtering based on impact in combination with the `skipFailures` argument allows you to introduce `cypress-axe` into tests for a legacy application without failing in CI before you have an opportunity to address accessibility issues. Ideally, you would steadily move towards stricter testing as you address issues.
+Filtering based on impact in combination with the `skipFailures` argument allows you to introduce `cypress-axe-commands` into tests for a legacy application without failing in CI before you have an opportunity to address accessibility issues. Ideally, you would steadily move towards stricter testing as you address issues.
 
 ##### violationCallback (optional)
 

@@ -1,5 +1,5 @@
 {
-  "name": "@josephearl/cypress-axe",
+  "name": "cypress-axe-commands",
   "version": "0.9.0",
   "files": [
     "dist"
@@ -40,10 +40,10 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/avanslaars/cypress-axe.git"
+    "url": "git+https://github.com/josephearl/cypress-axe.git"
   },
   "bugs": {
-    "url": "https://github.com/avanslaars/cypress-axe/issues"
+    "url": "https://github.com/josephearl/cypress-axe/issues"
   },
-  "homepage": "https://github.com/avanslaars/cypress-axe#readme"
+  "homepage": "https://github.com/josephearl/cypress-axe#readme"
 }
