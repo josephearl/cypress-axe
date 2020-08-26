@@ -18,4 +18,3 @@
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 require('./../dist/index');
-//require('./../../vehicle-suitability-ui/functional-tests/node_modules/cypress-axe/dist/index');
