@@ -6,19 +6,17 @@ This package provides three simple [Cypress](https://cypress.io) commands to hel
 
 ## Install and configure
 
-### Add as a dev dependency:
+Add `cypress-axe-commands` as a dev dependency:
 
 ```sh
-npm i -D cypress-axe-commands
+npm install --save-dev cypress-axe-commands
 ```
 
-### Install peer dependencies:
+Add `cypress` peer dependency:
 
 ```sh
-npm i -D cypress
+npm install --save-dev cypress
 ```
-
-**NOTE:** _axe-core is now bundled and doesn't need to be installed as a peer dependency_
 
 ### Include the commands
 
@@ -38,7 +36,7 @@ import 'cypress-axe-commands'
 
 This will inject the `axe-core` runtime into the page under test. You must run this **after** a call to `cy.visit()` and before you run the `checkA11y` command.
 
-You run this command with `cy.injectAxe()` either in your test, or in a `beforeEach`, as long as the `visit` comes first.
+You run this command with `cy.injectAxe()` either in your test, or in a `beforeEach`, as long as the `visit` comes first:
 
 ```js
 beforeEach(() => {
@@ -49,11 +47,7 @@ beforeEach(() => {
 
 ### cy.configureAxe
 
-#### Purpose
-
-To configure the format of the data used by aXe. This can be used to add new rules, which must be registered with the library to execute.
-
-#### Description
+Configure the format of the data used by aXe. This can be used to add new rules, which must be registered with the library to execute.
 
 User specifies the format of the JSON structure passed to the callback of axe.run
 
@@ -147,13 +141,13 @@ it('Has no a11y violations after button click', () => {
 
 #### Using the violationCallback argument
 
-The violation callback parameter accepts a function and allows you to add custom behavior when violations are found.
+The violation callback parameter accepts a function and allows you to add custom behavior or assertions.
 
-This example adds custom logging to the terminal running Cypress, using `cy.task` and the `violationCallback` argument for `cy.checkA11y`
+This example adds custom logging to the terminal running Cypress, using `cy.task` and the `violationCallback` argument for `cy.checkA11y`.
 
 ##### In Cypress plugins file
 
-This registers a `log` task as seen in the [Cypress docs for cy.task](https://docs.cypress.io/api/commands/task.html#Usage) as well as a `table` task for sending tabular data to the terminal.
+This registers a `log` task as seen in the [Cypress docs for cy.task](https://docs.cypress.io/api/commands/task.html#Usage) as well as a `table` task for sending tabular data to the terminal:
 
 ```js
 module.exports = (on, config) => {
@@ -174,28 +168,23 @@ module.exports = (on, config) => {
 
 #### In your spec file
 
-Then we create a function that uses our tasks and pass it as the `validationCallback` argument to `cy.checkA11y`
+Then we create a function that uses our tasks and pass it as the `validationCallback` argument to `cy.checkA11y`:
 
 ```js
 // Define at the top of the spec file or just import it
 function terminalLog(violations) {
-  cy.task(
-    'log',
-    `${violations.length} accessibility violation${
-      violations.length === 1 ? '' : 's'
-    } ${violations.length === 1 ? 'was' : 'were'} detected`
-  )
-  // pluck specific keys to keep the table readable
-  const violationData = violations.map(
-    ({ id, impact, description, nodes }) => ({
-      id,
-      impact,
-      description,
-      nodes: nodes.length
-    })
-  )
-
-  cy.task('table', violationData)
+  if (violations.length > 0) {
+    // Pluck specific keys to keep the table readable
+    const violationData = violations.map(
+      ({ id, impact, description, nodes }) => ({
+        id,
+        impact,
+        description,
+        nodes: nodes.length
+      })
+    )
+    cy.task('table', violationData)
+  }
 }
 
 // Then in your test...
