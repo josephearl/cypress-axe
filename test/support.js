@@ -17,4 +17,4 @@
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-require('./../dist/index');
+require('./../dist/index')

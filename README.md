@@ -173,6 +173,9 @@ Then we create a function that uses our tasks and pass it as the `validationCall
 ```js
 // Define at the top of the spec file or just import it
 function terminalLog(violations) {
+  cy.task('log', `${violations.length} accessibility violation${
+    violations.length === 1 ? '' : 's'
+  } ${violations.length === 1 ? 'was' : 'were'} detected`)
   if (violations.length > 0) {
     // Pluck specific keys to keep the table readable
     const violationData = violations.map(
