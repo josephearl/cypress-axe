@@ -60,21 +60,30 @@ const checkA11y = (
       return cy.wrap(violations, { log: false })
     })
     .then(violations => {
+      const summaryMessage = `${violations.length} accessibility violation${
+        violations.length === 1 ? '' : 's'
+      } ${violations.length === 1 ? 'was' : 'were'} detected`
+      const voilationsMessage = violations.map((v, index) => {
+        const selectors = v.nodes
+            .reduce((acc, node) => acc.concat(node.target), [])
+            .join(', ')
+        return `${index+1}) ${v.id} on ${v.nodes.length} Node${
+          v.nodes.length === 1 ? '' : 's'
+        }: ${selectors}`
+      }).join(', ')
+      const errorMessage = `${summaryMessage} ${voilationsMessage}`
+
       if (!skipFailures) {
         assert.equal(
           violations.length,
           0,
-          `${violations.length} accessibility violation${
-            violations.length === 1 ? '' : 's'
-          } ${violations.length === 1 ? 'was' : 'were'} detected`
+          errorMessage
         )
       } else {
         if (violations.length) {
           Cypress.log({
             name: 'a11y violation summary',
-            message: `${violations.length} accessibility violation${
-              violations.length === 1 ? '' : 's'
-            } ${violations.length === 1 ? 'was' : 'were'} detected`
+            message: errorMessage
           })
         }
       }
