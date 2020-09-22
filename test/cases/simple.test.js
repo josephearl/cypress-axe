@@ -1,8 +1,8 @@
-function terminalLog(violations) {
-  cy.task('log', `${violations.length} accessibility violation${
-    violations.length === 1 ? '' : 's'
-  } ${violations.length === 1 ? 'was' : 'were'} detected`)
+function logViolations(violations) {
   if (violations.length > 0) {
+    cy.task('log', `${violations.length} accessibility violation${
+      violations.length === 1 ? '' : 's'
+    } ${violations.length === 1 ? 'was' : 'were'} detected`)
     // Pluck specific keys to keep the table readable
     const violationData = violations.map(
       ({ id, impact, description, nodes }) => ({
@@ -22,7 +22,7 @@ describe('Simple', () => {
         cy.injectAxe()
         cy.checkA11y(undefined, undefined, (violations) => {
             assert.equal(violations.length, 5, 'Expected 5 violations to be found')
-            terminalLog(violations)
+            logViolations(violations)
         }, true)
     })
 })
